@@ -1,0 +1,25 @@
+def closest_divisible(n, m):
+    # Calculate the closest number divisible by m
+    q = n // m  # Integer division to find the quotient
+
+    # Calculate two possible candidates
+    n1 = m * q  # Closest divisible number below or equal to n
+    n2 = m * (q + 1) if n >= 0 else m * (q - 1)  # Closest above n
+
+    # If n is perfectly divisible by m, return n
+    if n % m == 0:
+        return n
+
+    # Otherwise, return the closer number or the one with the larger absolute value
+    if abs(n - n1) < abs(n - n2):
+        return n1
+    elif abs(n - n1) > abs(n - n2):
+        return n2
+    else:
+        return n2 if abs(n2) > abs(n1) else n1
+
+# Input
+n, m = map(int, input().split())
+
+# Output
+print(closest_divisible(n, m))
