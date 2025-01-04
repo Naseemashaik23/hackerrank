@@ -1,0 +1,30 @@
+def compress_message(msg):
+    n = len(msg)
+    if n == 0:
+        return ""
+    
+    compressed = []
+    count = 1  # Initialize frequency count
+    
+    for i in range(1, n):
+        if msg[i] == msg[i - 1]:
+            count += 1  # Increment count if the current character is same as the previous one
+        else:
+            # Append the character and its count (if greater than 1)
+            compressed.append(msg[i - 1])
+            if count > 1:
+                compressed.append(str(count))
+            count = 1  # Reset the count
+    
+    # Append the last character and its count (if greater than 1)
+    compressed.append(msg[-1])
+    if count > 1:
+        compressed.append(str(count))
+    
+    return "".join(compressed)
+
+# Input
+msg = input().strip()
+
+# Output
+print(compress_message(msg))
