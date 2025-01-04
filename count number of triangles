@@ -1,0 +1,30 @@
+def count_triangles(arr):
+    n = len(arr)
+    if n < 3:
+        return -1  # Not enough elements to form a triangle
+    
+    # Sort the array
+    arr.sort()
+    count = 0
+    
+    # Iterate through each triplet
+    for i in range(n - 1, 1, -1):  # Pick the largest element for the triangle
+        left = 0
+        right = i - 1
+        while left < right:
+            # Check if arr[left] + arr[right] > arr[i]
+            if arr[left] + arr[right] > arr[i]:
+                # All pairs (arr[left], arr[x]) with x in [left, right-1] will also satisfy the condition
+                count += (right - left)
+                right -= 1  # Move right pointer to check for smaller pairs
+            else:
+                left += 1  # Move left pointer to increase the sum
+    
+    return count
+
+# Input
+n = int(input())  # Number of elements
+arr = list(map(int, input().split()))  # Array of integers
+
+# Output
+print(count_triangles(arr))
